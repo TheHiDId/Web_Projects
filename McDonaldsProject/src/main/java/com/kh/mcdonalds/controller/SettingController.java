@@ -1,11 +1,14 @@
 package com.kh.mcdonalds.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.mcdonalds.model.dto.Burger;
 
@@ -50,6 +53,22 @@ public class SettingController extends HttpServlet {
 		// requestScope
 		request.setAttribute("brand", "KFC");
 		request.setAttribute("bestSeller", new Burger("KFC", "징거버거", 6200));
+		
+		// sessionScope
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("brand", "McDonald");
+		session.setAttribute("bestSeller", new Burger("McDonald", "빅맥", 6800));
+		
+		// 숫자
+		request.setAttribute("bigNumber", 10);
+		request.setAttribute("smallNumber", 3);
+
+		// 문자
+		request.setAttribute("str", "집에 가고 싶다");
+		
+		// 리스트
+		request.setAttribute("list", new ArrayList());
 		
 		// 응답 view 위임 -> 포워딩
 		request.getRequestDispatcher("/WEB-INF/views/print.jsp").forward(request, response);
